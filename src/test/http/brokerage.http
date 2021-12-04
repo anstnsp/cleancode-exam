@@ -1,0 +1,16 @@
+### 중개수수료 - 매매
+GET {{host}}/api/calc/brokerage?actionType=PURCHASE&price=1000000000
+
+### 중개수수료 - 임대
+GET {{host}}/api/calc/brokerage?actionType=RENT&price=1000000000
+
+### 중개수수료 - 임대
+GET {{host}}/api/cacl/1?actionType=PURCHASE
+
+### 중개수수료 - 임대
+GET {{host}}/api/cacl/1?actionType=RENT
+
+
+
+
+
