@@ -6,6 +6,9 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Apartment", indexes = {
+    @Index(name = "idx_apartment_name", columnList = "name")
+})
 @Getter
 @Setter
 public class Apartment {

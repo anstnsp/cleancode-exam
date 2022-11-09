@@ -1,3 +1,4 @@
+
 spring:
   jpa:
     database: h2
@@ -12,3 +13,7 @@ spring:
   sql:
     init:
       mode: always
+server:
+  port: 1234
+
+#test: value is present
