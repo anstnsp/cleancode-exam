@@ -1,0 +1,16 @@
+name: echo
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  echo:
+    runs-on: [ ubuntu-latest ]
+
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
