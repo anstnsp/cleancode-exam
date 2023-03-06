@@ -14,7 +14,7 @@
             <multicast enabled="false"/>
             <tcp-ip enabled="true">
                 <member-list>
-                    <member>localhost:5702</member>
+                    <member>10.113.138.192:5702</member>
                 </member-list>
             </tcp-ip>
         </join>

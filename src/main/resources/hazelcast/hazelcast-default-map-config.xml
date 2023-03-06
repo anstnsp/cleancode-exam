@@ -6,7 +6,7 @@
            http://www.hazelcast.com/schema/config/hazelcast-config-5.2.xsd">
 
     <map name="default">
-        <time-to-live-seconds>3</time-to-live-seconds>
+        <time-to-live-seconds>60</time-to-live-seconds>
         <backup-count>2</backup-count>
         <async-backup-count>0</async-backup-count>
         <read-backup-data>true</read-backup-data>
