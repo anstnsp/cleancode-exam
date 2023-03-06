@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://github.com/hazelcast/hazelcast/blob/master/hazelcast/src/main/resources/hazelcast-full-example.xml -->
+<hazelcast xmlns="http://www.hazelcast.com/schema/config"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.hazelcast.com/schema/config
+           http://www.hazelcast.com/schema/config/hazelcast-config-5.2.xsd">
+
+    <cluster-name>sso-test</cluster-name>
+    <import resource="hazelcast/hazelcast-default-map-config.xml"/>
+    <network>
+        <port port-count="20">5702</port>
+        <join>
+            <multicast enabled="false"/>
+            <tcp-ip enabled="true">
+                <member-list>
+                    <member>localhost:5702</member>
+                </member-list>
+            </tcp-ip>
+        </join>
+    </network>
+
+
+    <wan-replication name="standby-wan-rep">
+        <batch-publisher>
+            <publisher-id>standbyPublisherId</publisher-id>
+            <cluster-name>standby-sso-api-fin-real</cluster-name>
+            <!--dvsso-api01.fin3, dvsso-api02.fin3-->
+            <target-endpoints></target-endpoints>
+        </batch-publisher>
+    </wan-replication>
+
+    <map name="replicatedMap">
+        <wan-replication-ref name="standby-wan-rep"/>
+    </map>
+
+</hazelcast>

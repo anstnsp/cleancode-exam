@@ -1,5 +1,6 @@
 package com.phangil.houseutils.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +27,10 @@ public class Apartment {
     @Column(nullable = false)
     private Long price;
 
-
+    @Builder
+    public Apartment(String name, String address, Long price) {
+        this.name = name;
+        this.address = address;
+        this.price = price;
+    }
 }

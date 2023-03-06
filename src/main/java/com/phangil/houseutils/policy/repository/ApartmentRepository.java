@@ -1,4 +1,4 @@
-package com.phangil.houseutils.repository;
+package com.phangil.houseutils.policy.repository;
 
 import java.util.List;
 

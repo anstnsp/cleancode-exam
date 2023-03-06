@@ -5,8 +5,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.net.URI;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +29,11 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 public class BrokeragePolicyTest {
     PurchaseBrokeragePolicy purchaseBrokeragePolicy;
@@ -147,6 +159,7 @@ public class BrokeragePolicyTest {
     }
 
 
+
     @Test
     public void testPurchaseBrokeragePolicy() {
         Assertions.assertEquals(
@@ -184,4 +197,69 @@ public class BrokeragePolicyTest {
 
         System.out.println(오호대장군);
     }
+
+    @Test
+    public void asdfsadf() {
+        Gov aa = new Gov(1,3);
+        if (aa.getA() == 1 || aa.getB() == 3) {
+            System.out.println("성고오오오옹");
+        }
+    }
+
+    @Test
+    public void fsfef2f() {
+        System.out.println(600/60 + " 분");
+        System.out.println(1800/60 + " 분");
+        System.out.println(3600/60 + "분");
+        System.out.println(10800/60 + "분");
+    }
+
+    @Test
+    public void uri() {
+        String uriString = "https://gaga-kim.tistory.com:9908/entry/Spring-Boot-Swagger%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-API-%EB%AC%B8%EC%84%9C-%EC%9E%90%EB%8F%99%ED%99%94";
+            URI uri = URI.create(uriString);
+            try {
+                uri = new URI(uri.getScheme(), uri.getHost(), uri.getPath(), uri.getFragment());
+            } catch (Exception e) {
+
+                System.out.println(uriString);
+            }
+        System.out.println(uri.toString());
+    }
+
+    @Test
+    public void asdfasdfwef() {
+        Long defaultMbrNo = null;
+        String defaultMbrNoString = (defaultMbrNo == 0L | defaultMbrNo == null) ? "" : String.valueOf(defaultMbrNo);
+        System.out.println(defaultMbrNo);
+    }
+
+    @Test
+    public void betaAuthorize22() {
+        RestTemplate restTemplate = new RestTemplate();
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap();
+
+        ResponseEntity<String> res =restTemplate.getForEntity("https://beta-auth.ncloud.com/loginForm", String.class);
+        System.out.println(res);
+    }
+    public class Gov {
+        public Gov(int a, int b) {
+            this.a = a;
+            this.b = b;
+        }
+
+        private int a;
+        private int b;
+
+        public int getA() {
+            return a;
+        }
+
+        public int getB() {
+            return b;
+        }
+    }
 }
+
+
+
