@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.asm.TypeReference;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -13,12 +14,16 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -26,9 +31,15 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.phangil.houseutils.constants.Role;
+import com.phangil.houseutils.exception.Child;
+import com.phangil.houseutils.exception.Parent;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -51,7 +62,7 @@ public class BrokeragePolicyTest {
     }
 
 
-    @Test
+    @org.junit.Test
     public void sdfw() {
         System.out.println(test());
     }
@@ -154,11 +165,29 @@ public class BrokeragePolicyTest {
         });
 
         String[] arr = new String[5];
-
-
     }
 
 
+    @Test
+    void nullEqulasSomething() {
+        try {
+            Gov gov = new Gov("C");
+            if(gov.getC().equals(null)) {
+                System.out.println("Gg");
+            }
+            if(gov.c.equals(null)) {
+                System.out.println("null");
+            } else {
+                System.out.println("not null");
+            }
+            if("ff".equals(null)) {
+                System.out.println("not null");
+            }
+        } catch (Exception e) {
+            System.out.println("에러발생");
+        }
+
+    }
 
     @Test
     public void testPurchaseBrokeragePolicy() {
@@ -242,14 +271,103 @@ public class BrokeragePolicyTest {
         ResponseEntity<String> res =restTemplate.getForEntity("https://beta-auth.ncloud.com/loginForm", String.class);
         System.out.println(res);
     }
+
+
+    @Test
+    public void betaAuthorize2233() {
+       try {
+           throw new RuntimeException("catch");
+       } catch (Exception e) {
+           System.out.println(e.getMessage());
+           System.out.println("@@@@@");
+       }
+        System.out.println("end");
+        System.out.println(UUID.randomUUID().toString());
+    }
+
+    @Test
+    public void urltest() {
+        System.out.println(isUrl("http://aadadad"));
+        System.out.println(isUrl("https://google.com"));
+        System.out.println(isUrl("https://www.google.com"));
+        System.out.println(isUrl("http://localhost:8080"));
+        System.out.println(isUrl("https://localhost:8080?param1=val"));
+        System.out.println(isUrl("http://localhost:8080?param1=val?param2=val"));
+        System.out.println(isUrl("https://naver.com"));
+        System.out.println(isUrl("https://naver.com?DynamicParam1=val"));
+    }
+
+    @Test
+    void asefesaf() {
+        Parent parent = Child.builder().parent("parent").child("child").build();
+
+        System.out.println("parent:"+parent );
+        Child child = null;
+        if (parent instanceof Child) {
+            child = (Child)parent;
+        }
+        System.out.println(child.getChild());
+        System.out.println(child.getParent());
+        System.out.println("child:"+child);
+    }
+    //"(?i)\\b((?:https?://|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))";
+    //"^((http[s]?):\\/\\/)?(www\\.)?[a-zA-Z0-9]+\\.[a-zA-Z]+(\\.[a-zA-Z]+)?$";
+    public static boolean isUrl(String text) {
+//        Pattern p = Pattern.compile("^((http|https)://)?([a-z0-9]+[.])?[a-z0-9]+[.][a-z]{2,3}([.][a-z]{2})?(/.*)?$");
+        Pattern p = Pattern.compile("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$");
+        Matcher m = p.matcher(text);
+        if  (m.matches()) return true;
+        URL u = null;
+        try {
+            u = new URL(text);
+        } catch (MalformedURLException e) {
+            return false;
+        }
+        try {
+            u.toURI();
+        } catch (URISyntaxException e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Test
+    void fsefsf() {
+        List<String> aa = new ArrayList<>();
+        aa.add("aa");
+            aa.add("bb");
+        System.out.println(aa);
+        String str = null;
+        apapaaa(str);
+        System.out.println("Str:"+str);
+    }
+
+    @Test
+    void enumEqual() {
+        if (Status.ACTIVE.equals(Status.ACTIVE)) {
+            System.out.println("같다");
+        }
+        if (Status.ACTIVE == Status.ACTIVE) {
+            System.out.println("같다22");
+        }
+
+    }
+
+    private void apapaaa(String str) {
+        str = "test";
+    }
+
     public class Gov {
         public Gov(int a, int b) {
             this.a = a;
             this.b = b;
         }
-
+        public Gov(String c) {
+            this.c = c;
+        }
         private int a;
         private int b;
+        private String c;
 
         public int getA() {
             return a;
@@ -258,6 +376,12 @@ public class BrokeragePolicyTest {
         public int getB() {
             return b;
         }
+        public String getC() { return c; }
+    }
+
+    public enum Status {
+        ACTIVE,
+        DELETED
     }
 }
 
