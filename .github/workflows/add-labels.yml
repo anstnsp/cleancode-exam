@@ -6,7 +6,7 @@ on:
 jobs:
 
   labeler:
-    runs-on: [ sso-runner ]
+    runs-on: [ubuntu-latest]
 
     steps:
       - name: Check Labels
