@@ -20,6 +20,7 @@ public class AppConfig {
 		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 		objectMapper.registerModule(new JavaTimeModule());
 		//gof
+		//folgsog
 		return objectMapper;
 	}
 
